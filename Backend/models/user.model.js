@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 
-
-const userSchema = new mongoose.SchemaTypes({
+const userSchema = new mongoose.Schema({
   fullname: {
     firstname: {
       type: String,
@@ -25,14 +24,14 @@ const userSchema = new mongoose.SchemaTypes({
     type: String,
     required: true,
     select: false,
-    minLength: [8, "Password must be at least 8 characters long"],
+    minLength: [6, "Password must be at least 6 characters long"],
   },
   socketId: {
     type: String,
   }
 });
 
-userSchema.methods.generateAuthToken = function (params) {
+userSchema.methods.generateAuthToken = function () {
   const token = jsonwebtoken.sign({ _id: this._id }, process.env.JWT_SECRET);
   return token;
 }
@@ -41,7 +40,7 @@ userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 }
 
-userSchema.static.hashPassword = async function (password) {
+userSchema.statics.hashPassword = async function (password) {
   return await bcrypt.hash(password, 10);
 }
 
