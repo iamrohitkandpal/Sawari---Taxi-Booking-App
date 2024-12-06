@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from "express-validator"
-import { loginUser, registerUser } from './../controllers/user.controller.js';
+import { loginUser, registerUser, getUserProfile } from './../controllers/user.controller.js';
 const router = express.Router();
 
 router.post("/register", [
@@ -17,5 +17,7 @@ router.post("/login", [
 ],
     loginUser
 )
+
+router.get("/profile", getUserProfile);
 
 export default router;

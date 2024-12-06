@@ -60,3 +60,7 @@ export const loginUser = async (req, res, next) => {
 
     res.status(200).json({ token, user });
 }
+
+export const getUserProfile = async (req, res, next) => {
+    
+}
