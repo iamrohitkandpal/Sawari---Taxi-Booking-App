@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import userModel from "../models/user.model.js";
 import { createUser } from "../services/user.service.js";
-import blCKListTokenModel from "../models/blacklistToken.model.js";
+import blacklistTokenModel from "../models/blacklistToken.model.js";
 
 export const registerUser = async (req, res, next) => {
   const errors = validationResult(req);
@@ -11,9 +11,9 @@ export const registerUser = async (req, res, next) => {
 
   const { fullname, email, password } = req.body;
 
-  const isUserAlready = await userModel.findOne({ email });
+  const isUserAlreadyThere = await userModel.findOne({ email });
 
-  if (isUserAlready) {
+  if (isUserAlreadyThere) {
     return res.status(400).json({ message: "User already exist" });
   }
 
@@ -70,7 +70,7 @@ export const logOutUser = async (req, res, next) => {
   res.clearCookie('token');
   const token = req.cookies.token || req.headers.authorization.split(" ")[1];
 
-  await blCKListTokenModel.create({ token });
+  await blacklistTokenModel.create({ token });
 
   res.status(200).json({ message: "Logout Successfully" });
 };

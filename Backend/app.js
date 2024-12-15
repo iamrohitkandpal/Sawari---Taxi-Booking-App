@@ -3,6 +3,7 @@ import express, { urlencoded } from 'express';
 import cors from 'cors';
 import connection from './db/db.js';
 import userRoutes from "./routes/user.routes.js";
+import captainRoutes from "./routes/captain.routes.js";
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
     res.send('Backend Working');
 });
 
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
+app.use("/captains", captainRoutes);
 
 export default app;
