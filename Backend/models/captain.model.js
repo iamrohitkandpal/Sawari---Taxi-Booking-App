@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { bcrypt } from 'bcrypt';
-import { jsonwebtoken } from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import jsonwebtoken from 'jsonwebtoken';
 
 const captainSchema = new mongoose.Schema({
   fullname: {
@@ -84,3 +84,4 @@ captainSchema.statics.hashPassword = async function (password) {
 const captainModel = mongoose.model("Captain", captainSchema);
 
 export default captainModel;
+
