@@ -6,9 +6,17 @@ const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [userData, setUserData] = useState({});
+
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    setUserData({
+      email: email,
+      password: password,
+    })
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -44,14 +52,14 @@ const UserLogin = () => {
 
           <p className="text-sm text-center">
             New Here?
-            <Link className="text-blue-500 tesem"> Register Now</Link>
+            <Link className="text-blue-500 font-semibold"> Create a Account</Link>
           </p>
         </form>
       </div>
       <div className="px-2">
-        <button className="bg-[#F75D43] text-white mb-3 rounded-md px-4 py-[0.7rem] w-full text-sm">
-          Sign in as Captain
-        </button>
+        <Link to='/cap-login' className="bg-[#FC3C06] flex items-center justify-center text-white mb-3 rounded-md px-4 py-[0.7rem] w-full text-sm">
+          Captain Sign In
+        </Link>
       </div>
     </div>
   );
