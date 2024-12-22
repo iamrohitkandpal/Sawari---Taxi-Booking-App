@@ -34,7 +34,7 @@ const UserLogin = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@gmail.com"
-            className="bg-[#eeeeee] mb-4 rounded-md px-4 py-2 border w-full text-base placeholder:text-base"
+            className="bg-[#eeeeee] mb-4 rounded-md px-4 py-2 border w-full text-base placeholder:text-sm"
           />
           <h3 className="text-base mb-1">Password</h3>
           <input
@@ -43,7 +43,7 @@ const UserLogin = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Example_Password123"
-            className="bg-[#eeeeee] mb-6 rounded-md px-4 py-2 border w-full text-base placeholder:text-base"
+            className="bg-[#eeeeee] mb-6 rounded-md px-4 py-2 border w-full text-base placeholder:text-sm"
           />
 
           <button className="bg-black text-white mb-2 rounded-md px-4 py-[0.7rem] w-full text-sm">
@@ -52,7 +52,7 @@ const UserLogin = () => {
 
           <p className="text-sm text-center">
             New Here?
-            <Link className="text-blue-500 font-semibold"> Create a Account</Link>
+            <Link to="/signup" className="text-blue-500 font-semibold"> Create a Account</Link>
           </p>
         </form>
       </div>
