@@ -27,23 +27,23 @@ const CaptainLogin = () => {
         </Link>
 
         <form onSubmit={(e) => submitHandler(e)} className="p-2">
-          <h3 className="text-sm mb-1">Email Id</h3>
+          <h3 className="text-base font-medium mb-1">Cap Email Id</h3>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@gmail.com"
-            className="bg-[#eeeeee] mb-4 rounded-md px-4 py-2 border w-full text-base placeholder:text-base"
+            className="bg-[#eeeeee] mb-4 rounded-md px-4 py-3 border w-full text-sm placeholder:text-sm"
           />
-          <h3 className="text-base mb-1">Password</h3>
+          <h3 className="text-base font-medium mb-1">Password</h3>
           <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Example_Password123"
-            className="bg-[#eeeeee] mb-6 rounded-md px-4 py-2 border w-full text-base placeholder:text-base"
+            className="bg-[#eeeeee] mb-6 rounded-md px-4 py-3 border w-full text-sm placeholder:text-sm"
           />
 
           <button className="bg-black text-white mb-2 rounded-md px-4 py-[0.7rem] w-full text-sm">
@@ -52,7 +52,7 @@ const CaptainLogin = () => {
 
           <p className="text-sm text-center">
             Join a fleet?
-            <Link className="text-blue-500 font-semibold"> Register as a Captain</Link>
+            <Link to='/cap-signup' className="text-blue-500 font-semibold"> Register as a Captain</Link>
           </p>
         </form>
       </div>

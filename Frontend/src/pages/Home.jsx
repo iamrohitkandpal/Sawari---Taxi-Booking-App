@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <div
-        className="h-screen pt-5 w-full justify-between flex flex-col bg-red-400"
+        className="h-screen pt-5 w-full justify-between flex flex-col"
         style={{
           backgroundImage: `url(${home})`,
           backgroundSize: "cover",
