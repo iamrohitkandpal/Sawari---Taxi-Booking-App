@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { logo } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/UserContext";
+import axios from "axios";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [userData, setUserData] = useState({});
 
+  const { user, setUser } = useContext(UserDataContext);
+  const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setUserData({
-      email: email,
-      password: password,
-    })
+    const newUser = {
+      email,
+      password,
+    };
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/login`,
+      newUser
+    );
+
+    if (response.status === 200) {
+      const data = response.data;
+      setUser(data.user);
+      navigate("/home");
+    }
+
     setEmail("");
     setPassword("");
   };
@@ -52,12 +67,18 @@ const UserLogin = () => {
 
           <p className="text-sm text-center">
             New Here?
-            <Link to="/signup" className="text-blue-500 font-semibold"> Create a Account</Link>
+            <Link to="/signup" className="text-blue-500 font-semibold">
+              {" "}
+              Create a Account
+            </Link>
           </p>
         </form>
       </div>
       <div className="px-2">
-        <Link to='/cap-login' className="bg-[#FC3C06] flex items-center justify-center text-white mb-3 rounded-md px-4 py-[0.7rem] w-full text-sm">
+        <Link
+          to="/cap-login"
+          className="bg-[#FC3C06] flex items-center justify-center text-white mb-3 rounded-md px-4 py-[0.7rem] w-full text-sm"
+        >
           Captain Sign In
         </Link>
       </div>

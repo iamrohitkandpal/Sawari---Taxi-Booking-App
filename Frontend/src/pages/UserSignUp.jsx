@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { logo } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "./../context/UserContext";
+import { UserDataContext } from "./../context/UserContext";
 
 const UserSignUp = () => {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState({ firstname: "", lastname: "" });
   const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({});
-  
+
   const navigate = useNavigate();
 
-  const { user, setUser } = React.useContext(UserContext);
+  const { user, setUser } = React.useContext(UserDataContext);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -23,14 +23,13 @@ const UserSignUp = () => {
     };
 
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/user/register`,
+      `${import.meta.env.VITE_BASE_URL}/users/register`,
       newUser
     );
 
     if (response.status === 201) {
       const data = response.data;
-      setUser(data).user;
-
+      setUser(data.user);
       navigate("/home");
     }
 
@@ -47,7 +46,7 @@ const UserSignUp = () => {
         </Link>
 
         <form onSubmit={(e) => submitHandler(e)} className="p-2">
-          <h3 className="text-base font-medium mb-1">User's Name</h3>
+          <h3 className="text-base font-medium mb-1">User&apos;s Name</h3>
           <div className="flex gap-2">
             <input
               type="name"
@@ -70,7 +69,7 @@ const UserSignUp = () => {
               className="bg-[#eeeeee] mb-4 rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
             />
           </div>
-          <h3 className="text-base font-medium mb-1">User's Email Id</h3>
+          <h3 className="text-base font-medium mb-1">User&apos;s Email Id</h3>
           <input
             type="email"
             required
