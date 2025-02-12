@@ -14,7 +14,7 @@ const UserLogout = () => {
     }).then((response) => {
         if(response.status === 200){
             localStorage.removeItem('token');
-            window.location.href = '/login';
+            navigate('/login');
         }
     });
 
