@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { logo } from "../assets";
 import { Link } from "react-router-dom";
+import { CaptainDataContext } from "../context/CreateContext";
 
 const CaptainSignUp = () => {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState({ firstname: "", lastname: "" });
   const [password, setPassword] = useState("");
-
   const [userData, setUserData] = useState({});
+
+  const [vehicleColor, setVehicleColor] = useState("");
+  const [vehiclePlate, setVehiclePlate] = useState("");
+  const [vehicleCapacity, setVehicleCapacity] = useState("");
+  const [vehicletype, petvehicleType] = useState("");
+
+  const [captainData, setCaptainData] = React.useContext(CaptainDataContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -81,7 +88,10 @@ const CaptainSignUp = () => {
 
           <p className="text-sm text-center">
             Done Already?
-            <Link to="/login" className="text-blue-500 font-semibold">{" "}Sign In</Link>
+            <Link to="/login" className="text-blue-500 font-semibold">
+              {" "}
+              Sign In
+            </Link>
           </p>
         </form>
       </div>
