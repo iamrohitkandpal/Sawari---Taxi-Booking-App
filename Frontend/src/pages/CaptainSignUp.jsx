@@ -8,7 +8,6 @@ const CaptainSignUp = () => {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState({ firstname: "", lastname: "" });
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
 
   const [vehicleColor, setVehicleColor] = useState("");
   const [vehiclePlate, setVehiclePlate] = useState("");
