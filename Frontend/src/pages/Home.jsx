@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import { logo } from "../assets";
-import { useGSAP } from '@gsap/react';
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import 'remixicon/fonts/remixicon.css';
-import LocationSearch from './../components/LocationSearch';
+import "remixicon/fonts/remixicon.css";
+import VehiclePanel from "./../components/VehiclePanel";
+import LocationSearch from "./../components/LocationSearch";
+import SelectedRide from "../components/SelectedRide";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -11,17 +13,41 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const panelRef = useRef(null);
   const closeRef = useRef(null);
+  const vehiclePanelRef = useRef(null);
+  const selectedRideRef = useRef(null);
+  const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
+  const [selectedRidePanel, setSelectedRidePanel] = useState(false);
 
-  useGSAP(function() {
-    gsap.to(panelRef.current, {
-      height: panelOpen ? "70%" : 0,
-      paddingLeft: panelOpen ? "1.25rem" : 0,
-      paddingRight: panelOpen ? "1.25rem" : 0,
-    });
-    gsap.to(closeRef.current, {
-      opacity: panelOpen ? 1 : 0,
-    });
-  }, [panelOpen, closeRef]);
+  useGSAP(
+    function () {
+      gsap.to(panelRef.current, {
+        display: panelOpen ? "block" : "none",
+        height: panelOpen ? "73%" : 0,
+      });
+      gsap.to(closeRef.current, {
+        opacity: panelOpen ? 1 : 0,
+      });
+    },
+    [panelOpen, closeRef]
+  );
+
+  useGSAP(
+    function () {
+      gsap.to(vehiclePanelRef.current, {
+        transform: vehiclePanelOpen ? "translateY(0)" : "translateY(100%)",
+      });
+    },
+    [vehiclePanelOpen, vehiclePanelRef]
+  );
+
+  useGSAP(
+    function () {
+      gsap.to(selectedRideRef.current, {
+        transform: selectedRidePanel ? "translateY(0)" : "translateY(100%)",
+      });
+    },
+    [selectedRidePanel, selectedRideRef]
+  );
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -41,11 +67,15 @@ const Home = () => {
       </div>
 
       <div className="h-screen flex flex-col justify-end absolute top-0 w-full">
-        <div className="bg-white h-[30%] p-5 relative">
-          <h5 ref={closeRef} onClick={() => setPanelOpen(false)} className="absolute top-4 right-6 text-2xl">
-            <i className="ri-arrow-down-wide-line"></i>
+        <div className="bg-white h-[27%] p-5 relative">
+          <h5
+            ref={closeRef}
+            onClick={() => setPanelOpen(false)}
+            className="absolute top-4 right-6 text-2xl text-zinc-500"
+          >
+            <i className="ri-arrow-down-s-line"></i>
           </h5>
-          <h4 className="text-lg font-semibold mb-[0.85rem] ">Find a trip</h4>
+          <h4 className="text-xl font-semibold mb-[0.85rem] ">Find a trip</h4>
           <form
             onSubmit={(e) => {
               submitHandler(e);
@@ -71,40 +101,20 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-white h-0">
-          <LocationSearch />
+        <div ref={panelRef} className="bg-white h-0 hidden px-5">
+          <LocationSearch
+            setVehiclePanelOpen={setVehiclePanelOpen}
+            setPanelOpen={setPanelOpen}
+          />
         </div>
       </div>
 
-      <div className="fixed w-full z-10 bg-white bottom-0 px-3 py-6">
-        <h3 className="text-2xl font-semibold mb-3">Choose a Vehicle</h3>
-        <div className="flex border-[3px] mb-2 active:border-black rounded-2xl p-3 items-center justify-between">
-              <img className="h-10" src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg" alt="" />
-              <div className="ml-2 w-1/2">
-                <h4 className="font-medium text-base">Beamer <span><i className="ri-user-3-fill"></i>4</span></h4>
-                <h5 className="font-medium text-sm">2 mins away</h5>
-                <p className="font-normal text-xs text-gray-600">Affordable, compact rides</p>
-              </div>
-              <h2 className="text-lg font-semibold">₹193.20</h2> 
-        </div>
-        <div className="flex border-[3px] mb-2 border-black rounded-2xl p-3 items-center justify-between">
-              <img className="h-10" src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648431773/assets/1d/db8c56-0204-4ce4-81ce-56a11a07fe98/original/Uber_Auto_558x372_pixels_Desktop.png" alt="" />
-              <div className="w-1/2">
-                <h4 className="font-medium text-base">Auto <span><i className="ri-user-3-fill"></i>4</span></h4>
-                <h5 className="font-medium text-sm">2 mins away</h5>
-                <p className="font-normal text-xs text-gray-600">Affordable, compact rides</p>
-              </div>
-              <h2 className="text-xl font-semibold">₹193.20</h2> 
-        </div>
-        <div className="flex border-[3px] mb-2 border-black rounded-2xl p-3 items-center justify-between">
-              <img className="h-10" src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_638,w_956/v1649231091/assets/2c/7fa194-c954-49b2-9c6d-a3b8601370f5/original/Uber_Moto_Orange_312x208_pixels_Mobile.png" alt="" />
-              <div className="w-1/2">
-                <h4 className="font-medium text-base">Moto <span><i className="ri-user-3-fill"></i>4</span></h4>
-                <h5 className="font-medium text-sm">2 mins away</h5>
-                <p className="font-normal text-xs text-gray-600">Affordable, compact rides</p>
-              </div>
-              <h2 className="text-xl font-semibold">₹193.20</h2> 
-        </div>
+      <div ref={vehiclePanelRef} className="fixed w-full z-10 bg-white bottom-0 px-3 py-6 translate-y-full">
+        <VehiclePanel setPanelOpen={setPanelOpen} setSelectedRidePanel={setSelectedRidePanel} setVehiclePanelOpen={setVehiclePanelOpen} />
+      </div>
+
+      <div ref={selectedRideRef} className="fixed w-full z-10 bg-white bottom-0 px-3 py-6 translate-y-full">
+        <SelectedRide setSelectedRidePanel={setSelectedRidePanel} />
       </div>
     </div>
   );
