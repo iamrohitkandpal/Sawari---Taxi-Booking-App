@@ -6,6 +6,7 @@ import "remixicon/fonts/remixicon.css";
 import VehiclePanel from "./../components/VehiclePanel";
 import LocationSearch from "./../components/LocationSearch";
 import SelectedRide from "../components/SelectedRide";
+import DriverSearch from "../components/DriverSearch";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -15,8 +16,10 @@ const Home = () => {
   const closeRef = useRef(null);
   const vehiclePanelRef = useRef(null);
   const selectedRideRef = useRef(null);
+  const vehicleFoundRef = useRef(null);
   const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
   const [selectedRidePanel, setSelectedRidePanel] = useState(false);
+  const [vehicleFound, setVehicleFound] = useState(false);
 
   useGSAP(
     function () {
@@ -47,6 +50,15 @@ const Home = () => {
       });
     },
     [selectedRidePanel, selectedRideRef]
+  );
+
+  useGSAP(
+    function () {
+      gsap.to(vehicleFoundRef.current, {
+        transform: vehicleFound ? "translateY(0)" : "translateY(100%)",
+      });
+    },
+    [vehicleFound, vehicleFoundRef]
   );
 
   const submitHandler = (e) => {
@@ -114,7 +126,11 @@ const Home = () => {
       </div>
 
       <div ref={selectedRideRef} className="fixed w-full z-10 bg-white bottom-0 px-3 py-6 translate-y-full">
-        <SelectedRide setSelectedRidePanel={setSelectedRidePanel} />
+        <SelectedRide setSelectedRidePanel={setSelectedRidePanel} setVehicleFound={setVehicleFound} />
+      </div>
+
+      <div ref={vehicleFoundRef} className="fixed w-full z-10 bg-white bottom-0 px-3 py-6 translate-y-full">
+        <DriverSearch  />
       </div>
     </div>
   );
