@@ -1,11 +1,14 @@
 import React from "react";
 
-const DriverSearch = () => {
+const DriverSearch = ({setSelectedRidePanel, setVehicleFound}) => {
   return (
     <div className="bg-white">
       <h5
-        onClick={() => setSelectedRidePanel(false)}
-        className="absolute top-4 right-6 text-zinc-500 text-2xl cursor-pointer hover:text-zinc-700 transition-colors"
+        onClick={() => {
+          setSelectedRidePanel(true);
+          setVehicleFound(false);
+        }}
+        className="absolute top-5 right-6 text-zinc-500 text-2xl cursor-pointer hover:text-zinc-700 transition-colors"
       >
         <i className="ri-arrow-down-s-line"></i>
       </h5>
