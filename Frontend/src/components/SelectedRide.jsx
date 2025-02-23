@@ -5,7 +5,7 @@ const SelectedRide = ({ setSelectedRidePanel, setVehicleFound }) => {
     <div className="bg-white">
       <h5
         onClick={() => setSelectedRidePanel(false)}
-        className="absolute top-4 right-6 text-zinc-500 text-2xl cursor-pointer hover:text-zinc-700 transition-colors"
+        className="absolute top-5 right-6 text-zinc-500 text-2xl cursor-pointer hover:text-zinc-700 transition-colors"
       >
         <i className="ri-arrow-down-s-line"></i>
       </h5>
