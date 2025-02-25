@@ -1,8 +1,12 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Riding = () => {
   return (
     <div className="h-screen">
+      <Link to="/home" className="fixed h-10 w-10 right-2 top-2 bg-white flex items-center justify-center rounded-full">
+        <i className="text-lg font-medium ri-home-5-line"></i>
+      </Link>
       <div className="h-1/2">
         <img
           className="h-full w-full object-cover"
@@ -18,23 +22,23 @@ const Riding = () => {
             className="h-12"
           />
           <div className="text-right">
-            <h2 className="text-lg font-medium">Rohit</h2>
+            <h2 className="text-lg font-medium capitalize">Rohit</h2>
             <h4 className="text-xl font-semibold -mt-1 -mb-1">GJ07 JK 1234</h4>
             <p className="text-sm text-gray-600">Maruti Suzuki Alto 800</p>
           </div>
         </div>
 
         <div className="flex gap-5 items-center justify-between flex-col">
-          <div className="w-full">
+          <div className="w-full mt-5">
             <div className="flex items-center gap-5 p-4 border-b-2 hover:bg-gray-100 transition duration-200">
-              <i className="ri-map-pin-2-fill text-2xl"></i>
+              <i className="ri-map-pin-2-fill text-xl"></i>
               <div>
                 <h3 className="text-lg font-semibold">562/11-A</h3>
                 <p className="text-sm text-gray-600">Example Destination</p>
               </div>
             </div>
             <div className="flex items-center gap-5 p-4 hover:bg-gray-100 transition duration-200">
-              <i className="ri-currency-line text-2xl"></i>
+              <i className="ri-currency-line text-xl"></i>
               <div>
                 <h3 className="text-lg font-semibold">₹183.20</h3>
                 <p className="text-sm text-gray-600">Cash</p>
