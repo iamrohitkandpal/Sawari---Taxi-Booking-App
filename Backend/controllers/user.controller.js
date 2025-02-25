@@ -67,10 +67,17 @@ export const getUserProfile = async (req, res, next) => {
 };
 
 export const logOutUser = async (req, res, next) => {
-  res.clearCookie('token');
-  const token = req.cookies.token || req.headers.authorization.split(" ")[1];
-
-  await blacklistTokenModel.create({ token });
-
-  res.status(200).json({ message: "Logout Successfully" });
+  try {
+    res.clearCookie('jwt');
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully"
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error during logout",
+      error: error.message
+    });
+  }
 };
