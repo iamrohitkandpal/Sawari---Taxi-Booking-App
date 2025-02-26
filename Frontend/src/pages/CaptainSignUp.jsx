@@ -33,6 +33,8 @@ const CaptainSignUp = () => {
         vehicleType: vehicleType,
       },
     };
+    console.log(captainData);
+    
 
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/captains/register`,
@@ -56,139 +58,116 @@ const CaptainSignUp = () => {
   };
 
   return (
-    <div className="bg-white p-5 flex flex-col justify-between h-screen">
-      <img src={logo} alt="logo" className="w-40 mb-8" />
+    <div className="p-4 flex flex-col justify-between h-screen">
+      <div>
+        <Link to="/">
+          <img className="w-28 mb-8" src={logo} alt="App Logo" />
+        </Link>
 
-      <form onSubmit={submitHandler}>
-        <div className="space-y-6">
-          <h3 className="text-lg font-medium text-gray-700">Email</h3>
+        <form onSubmit={submitHandler} className="p-2">
+          <h3 className="text-base font-medium mb-1">Captain&apos;s Name</h3>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              required
+              value={fullname.firstname}
+              onChange={(e) => setFullname({ ...fullname, firstname: e.target.value })}
+              placeholder="First Name"
+              className="bg-[#eeeeee] mb-4 rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
+            />
+            <input
+              type="text"
+              required
+              value={fullname.lastname}
+              onChange={(e) => setFullname({ ...fullname, lastname: e.target.value })}
+              placeholder="Last Name"
+              className="bg-[#eeeeee] mb-4 rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
+            />
+          </div>
+
+          <h3 className="text-base font-medium mb-1">Captain&apos;s Email Id</h3>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+            placeholder="johndoe@gmail.com"
+            className="bg-[#eeeeee] mb-4 rounded-md px-4 py-3 border w-full text-sm placeholder:text-sm"
           />
-        </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-1">
-            <h3 className="text-lg font-medium text-gray-700">First Name</h3>
-            <input
-              type="text"
-              required
-              value={fullname.firstname}
-              onChange={(e) =>
-                setFullname({ ...fullname, firstname: e.target.value })
-              }
-              placeholder="Enter first name"
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-            />
-          </div>
-          <div className="space-y-1">
-            <h3 className="text-lg font-medium text-gray-700">Last Name</h3>
-            <input
-              type="text"
-              required
-              value={fullname.lastname}
-              onChange={(e) =>
-                setFullname({ ...fullname, lastname: e.target.value })
-              }
-              placeholder="Enter last name"
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium text-gray-700">Password</h3>
+          <h3 className="text-base font-medium mb-1">Enter a Password</h3>
           <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+            placeholder="Example_Password123"
+            className="bg-[#eeeeee] mb-4 rounded-md px-4 py-3 border w-full text-sm placeholder:text-sm"
           />
-        </div>
 
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Vehicle Information
-          </h3>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <h3 className="text-base font-medium mb-1">Vehicle Details</h3>
+          <div className="flex gap-2 mb-4">
             <input
-              required
               type="text"
-              placeholder="Vehicle Color"
+              required
               value={vehicleColor}
               onChange={(e) => setVehicleColor(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+              placeholder="Vehicle Color"
+              className="bg-[#eeeeee] rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
             />
             <input
-              required
               type="text"
-              placeholder="Vehicle Plate"
+              required
               value={vehiclePlate}
               onChange={(e) => setVehiclePlate(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+              placeholder="Vehicle Plate"
+              className="bg-[#eeeeee] rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+
+          <div className="flex gap-2 mb-6">
             <input
-              required
               type="number"
-              placeholder="Vehicle Capacity"
+              required
               value={vehicleCapacity}
               onChange={(e) => setVehicleCapacity(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+              placeholder="Seating Capacity"
+              className="bg-[#eeeeee] rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
             />
             <select
               required
               value={vehicleType}
               onChange={(e) => setVehicleType(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+              className="bg-[#eeeeee] rounded-md px-4 py-3 w-1/2 border text-sm placeholder:text-sm"
             >
-              <option value="" disabled>
-                Vehicle Type
-              </option>
-              <option value="car">Car</option>
-              <option value="auto">Auto</option>
-              <option value="moto">Moto</option>
+              <option value="" disabled>Vehicle Type</option>
+              <option value="Car">Car</option>
+              <option value="Auto">Auto</option>
+              <option value="Bike">Bike</option>
             </select>
           </div>
-        </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors focus:ring-4 focus:ring-blue-200"
-        >
-          Create Captain Account
-        </button>
-      </form>
+          <button className="bg-black text-white mb-2 rounded-md px-4 py-[0.7rem] w-full text-sm">
+            Create Account
+          </button>
 
-      <p className="text-center mt-6 text-gray-600">
-        Already have an account?{" "}
-        <Link
-          to="/captain-login"
-          className="text-blue-600 hover:text-blue-700 font-medium"
-        >
-          Login here
-        </Link>
-      </p>
+          <p className="text-sm text-center">
+            Done Already?
+            <Link to="/cap-login" className="text-blue-500 font-semibold">
+              {" "}
+              Sign In
+            </Link>
+          </p>
+        </form>
+      </div>
 
-      <p className="text-xs text-gray-500 mt-8 leading-tight">
-        This site is protected by reCAPTCHA and the{" "}
-        <a href="#" className="underline hover:text-gray-700">
-          Google Privacy Policy
-        </a>{" "}
-        and{" "}
-        <a href="#" className="underline hover:text-gray-700">
-          Terms of Service
-        </a>{" "}
-        apply.
-      </p>
+      <div className="px-2">
+        <p className="text-[11px] text-zinc-600 text-center leading-tight">
+          This site is protected by reCapcha and the{" "}
+          <span className="underline">Google Privacy Policy</span> and{" "}
+          <span className="underline">Terms of Service</span> apply.
+        </p>
+      </div>
     </div>
   );
 };

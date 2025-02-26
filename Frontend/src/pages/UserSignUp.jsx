@@ -40,7 +40,7 @@ const UserSignUp = () => {
   };
 
   return (
-    <div className="p-5 flex flex-col justify-between h-screen">
+    <div className="p-4 flex flex-col justify-between h-screen">
       <div>
         <Link to="/">
           <img className="w-28 mb-8" src={logo} alt="App Logo" />
