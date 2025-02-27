@@ -4,7 +4,6 @@ import { createCaptain } from "../services/captain.service.js";
 import blacklistTokenModel from "../models/blacklistToken.model.js";
 
 export const registerCaptain = async (req, res, next) => {
-  console.log(req);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -30,7 +29,6 @@ export const registerCaptain = async (req, res, next) => {
     capacity: vehicle.capacity,
     vehicleType: vehicle.vehicleType,
   });
-  console.log(captain);
 
   const token = captain.generateAuthToken();
 
