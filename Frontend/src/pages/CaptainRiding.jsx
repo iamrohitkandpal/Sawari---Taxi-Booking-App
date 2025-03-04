@@ -34,7 +34,7 @@ const CaptainRiding = () => {
                 </Link>
             </div>
 
-            <div className='h-1/5 p-6 flex items-center justify-between relative bg-gray-400 pt-10'
+            <div className='h-1/5 p-4 flex items-center justify-between relative bg-gray-400 pt-10'
                 onClick={() => {
                     setFinishRidePanel(true)
                 }}
